@@ -8,6 +8,9 @@ from .forms import NewArticleForm, CommentForm, EditArticleForm
 from .models import Article, Comment
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+import logging
+
+logger = logging.getLogger(__name__)
 
 def base_view(request):
     return render(request, 'base.html')
@@ -56,15 +59,24 @@ def new_article_view(request):
         messages.info(request, "Musisz być zalogowany aby dodać artykuł")
         return redirect("/login")
     if request.method == 'POST':
+        logger.warning("dupa1")
         form = NewArticleForm(request.POST)
+        logger.warning("dupa2")
         if form.is_valid() and form["content"].value() and form["title"].value():
+            logger.warning("dupa3")
             article = form.save(commit=False)
+            logger.warning("dupa4")
             article.author = request.user
+            logger.warning("dupa5")
             article.save()
+            logger.warning("dupa6")
             return redirect('/', article_id=article.pk)
     else:
+        logger.warning("dupa7")
         form = NewArticleForm()
+        logger.warning("dupa8")
     
+    logger.warning("dupa9")
     return render(request, 'new_article.html', {'form': form})
 
 def article_view(request, id):
