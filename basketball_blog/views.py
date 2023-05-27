@@ -68,7 +68,10 @@ def new_article_view(request):
             logger.warning("dupa4")
             article.author = request.user
             logger.warning("dupa5")
-            article.save()
+            try:
+                article.save()
+            except Exception as e:
+                logger.exception(e)
             logger.warning("dupa6")
             return redirect('/', article_id=article.pk)
     else:
