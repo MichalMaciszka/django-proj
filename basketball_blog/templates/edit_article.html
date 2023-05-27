@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Edycja artykułu</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="{{ form.title.id_for_label }}">Tytuł:</label>
+        {{ form.title }}
+        </div>
+        
+        <div>
+        <label for="{{ form.content.id_for_label }}">Treść:</label>
+        {{ form.content }}
+        </div>
+        
+        <div>
+        <label for="{{ form.category.id_for_label }}">Kategoria:</label>
+        {{ form.category }}
+        </div>
+    <button type="submit">Zapisz zmiany</button>
+  </form>
+{% endblock %}

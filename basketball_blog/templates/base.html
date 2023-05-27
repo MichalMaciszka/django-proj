@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+
+        <title>Blog o koszykówce</title>
+    </head>
+    <body>   
+        <div class="container">
+            <nav>
+                <ul class="nav bg-info">
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="/">STRONA GŁÓWNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="/?category=NBA">NBA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="/?category=Euroliga">EUROLIGA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="/?category=PLK">PLK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="/?category=Reprezentacje">REPREZENTACJE</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="/logout">WYLOGUJ SIĘ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="/new-article">DODAJ ARTYKUŁ</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="/login">ZALOGUJ SIĘ</a>
+                    </li>
+                {% endif %}
+                {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="/admin">PANEL ADMINISTRACYJNY</a>
+                    </li>
+                {% endif %}
+                </ul>
+            </nav>
+            <header>
+                <di class="display-1">Blog o koszykówce</di>
+            </header>
+
+            <main>
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </body>
+</html>

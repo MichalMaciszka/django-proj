@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{%block content %}
+
+    <h5>Autor: {{article.author.username}}</h5>
+    <h6>Utworzono: {{article.created_at}}</h6>
+    <br/>
+    <br/>
+    {% if can_edit %}
+        <a href="/article/{{article.article_id}}/edit/">Edytuj wpis</a>
+    {% endif %}
+
+    {% if user.is_superuser or article.author == user %}
+        <form method="post" action="/article/{{article.article_id}}/">
+            {% csrf_token %}
+            <input type="hidden" name="article_id" value="{{ article.pk }}">
+            <button type="submit" name="delete_article">Usuń wpis</button>
+        </form>
+    {% endif %}
+
+    <h3>{{article.title}}</h3>
+    <div class="content">
+        {{article.content}}
+    </div>
+
+    <br/>
+    <br/>
+    {% if user.is_authenticated %}
+        <h5>Dodaj komentarz</h5>
+        <form method="post" action="/article/{{article.article_id}}/">
+            {% csrf_token %}
+            <div>
+                <label for="{{ form.content.id_for_label }}">Treść:</label>
+                {{ form.content }}
+            </div>
+            <button type="submit">Dodaj komentarz</button>
+        </form>
+        <br/>
+    {% endif %}
+    
+    <h4>Komentarze</h4>
+    {% for comment in comments %}
+        <h6>{{comment.author.username}} ({{comment.created_at}}): </h6>
+        {%if user.is_superuser or comment.author == user%}
+            <form method="post" action="/article/{{article.article_id}}/">
+                {% csrf_token %}
+                <input type="hidden" name="comment_id" value="{{ comment.pk }}">
+                <button type="submit" name="delete_comment">Usuń komentarz</button>
+            </form>
+        {% endif %}
+        <p>{{comment.content}}</p>
+    {% endfor %}
+
+    <br/>
+
+{% endblock %}

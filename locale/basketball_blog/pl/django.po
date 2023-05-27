@@ -1,0 +1,12 @@
+# PL: Tłumaczenia dla formularza rejestracji
+msgid "This password is too short. It must contain at least %(min_length)d characters."
+msgstr "Hasło jest zbyt krótkie. Musi zawierać co najmniej %(min_length)d znaków."
+
+msgid "The two password fields didn't match."
+msgstr "Pola z hasłem nie pasują do siebie."
+
+msgid "A user with that username already exists."
+msgstr "Użytkownik o takiej nazwie już istnieje."
+
+msgid "Please fill in this field."
+msgstr "Proszę wypełnić to pole."
