@@ -14,8 +14,6 @@ from pathlib import Path
 import os
 import dj_database_url
 
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-^i5f5&e17-*4f9x6^$g&(&*&uv$t8(fn$b9+&4^5fqwzu76*bt'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
