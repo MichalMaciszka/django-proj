@@ -8,7 +8,8 @@ class Category(models.Model):
         return self.name
 
 class Article(models.Model):
-    article_id = models.IntegerField(primary_key=True)
+    # article_id = models.IntegerField(primary_key=True)
+    article_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -16,7 +17,8 @@ class Article(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 class Comment(models.Model):
-    comment_id = models.IntegerField(primary_key=True)
+    # comment_id = models.IntegerField(primary_key=True)
+    comment_id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     content = models.TextField(null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
