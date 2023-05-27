@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{%block content %}
+    <div class="form-outline">
+        <form method="post" action="/new-article/">
+            {% csrf_token %}
+            
+            <div>
+                <label for="{{ form.title.id_for_label }}">Tytuł:</label>
+                {{ form.title }}
+            </div>
+            
+            <div>
+                <label for="{{ form.content.id_for_label }}">Treść:</label>
+                {{ form.content }}
+            </div>
+            
+            <div>
+                <label for="{{ form.category.id_for_label }}">Kategoria:</label>
+                {{ form.category }}
+            </div>
+            
+            <button type="submit">Dodaj artykuł</button>
+        </form>
+    </div>
+{% endblock %}

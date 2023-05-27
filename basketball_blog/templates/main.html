@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{%block content %}
+    {% for post in latest_posts %}
+        <a href="/article/{{post.article_id}}/">
+            <h3>{{ post.title }}</h3>
+        </a>
+        <p>autor: {{ post.author.username }}</p>
+        <p>data utworzenia: {{post.created_at}}</p>
+        <br/>
+        <br/>
+    {% endfor %}
+{% endblock %}

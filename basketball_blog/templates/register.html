@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="post" action="/register/">
+        {% csrf_token %}
+        <div>
+            <label for="id_username">Nazwa użytkownika:</label>
+            <input type="text" name="username" id="id_username">
+            <span class="helptext">Wymagana. 150 lub mniej znaków. Jedynie litery, cyfry i @/./+/-/_.</span>
+        </div>
+        <div>
+            <label for="id_password1">Hasło:</label>
+            <input type="password" name="password1" id="id_password1">
+            <span class="helptext">Twoje hasło musi się składać z co najmniej 4 znaków i nie może zawirać samych cyfr</span>
+        </div>
+        <div>
+            <label for="id_password2">Potwierdź hasło:</label>
+            <input type="password" name="password2" id="id_password2">
+            <span class="helptext">Wprowadź to samo hasło ponownie, dla weryfikacji.</span>
+        </div>
+        <button type="submit">Zarejestruj się</button>
+    </form>
+
+    {% if form.errors %}
+        <div class="errorlist">
+            <p>Znaleziono następujące błędy:</p>
+            <ul>
+                {% for field in form %}
+                    {% if field.errors %}
+                        <li>{{ field.label }}: {{ field.errors|join:", " }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        <div class="errorlist">
+            <p>{{ form.non_field_errors|join:", " }}</p>
+        </div>
+    {% endif %}
+
+
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
